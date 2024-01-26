@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import { Button } from '../../App.styles'
-
 
 export const MainContent = styled.div`
   width: 100%;
@@ -76,32 +74,22 @@ export const CardContent = styled.div``
 export const CardTitle = styled.h3`
   font-size: 22px;
   line-height: 120%;
-  color: #009ee4;
+  color: #000000;
   margin-bottom: 10px;
   margin-top: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: color 0.3s ease-out;
-
-  &:hover {
-    color: #ff6163;
-  }
 `
 
-export const CardPrice = styled.p`
-  color: #000000;
+export const CardDetails = styled.p`
+  color:#009ee4;
   font-size: 22px;
   font-weight: 600;
   line-height: 33px;
   margin-bottom: 10px;
-`
 
-export const CardDate = styled.p`
-  font-size: 16px;
-  line-height: 21px;
-  color: #5f5f5f;
-`
+  &:hover {
+    color: #ff6163;
 
-export const CardPlace = styled(CardDate)`
-  margin-bottom: 4px;
 `

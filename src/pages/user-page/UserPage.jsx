@@ -27,7 +27,7 @@ const navigate = useNavigate()
         Вернуться на главную
       </S.GoMainPageButton>
 
-        <S.ProfileTitle>Профиль пользователя</S.ProfileTitle>
+        <S.ProfileTitle>Информация о пользователе</S.ProfileTitle>
 
         {/* <S.Profile>
           <S.ProfileContent>

@@ -1,8 +1,7 @@
+import { Link } from 'react-router-dom'
 import * as S from './Users.styles'
-import { Loader } from '../../App.styles'
-// import { baseUrl } from '../../utils/baseUrl'
 
-export const Users = ({ data, isLoading, error }) => {
+export const Users = ({ usersData }) => {
   // Поиск
 
   // const filterAds = () => {
@@ -22,41 +21,28 @@ export const Users = ({ data, isLoading, error }) => {
 
   return (
     <S.MainContent>
-
-      {/* {isLoading ? (
-        <Loader />
-      ) : error ? (
-        <p> Не удалось загрузить список товаров, попробуйте позже</p>
-      ) : (
-        <S.Cards>
-          {filteredAds?.map((ad) => (
-            <S.CardsItem key={ad.id}>
-              <S.Card>
-                <S.CardImg>
-                  <Link to={`/adv/${ad.id}`}>
-                    <img
-                      src={
-                        ad?.images[0]
-                          ? baseUrl + ad.images[0].url
-                          : '/img/nopic.png'
-                      }
-                      alt="picture"
-                    />
-                  </Link>
-                </S.CardImg>
-                <S.CardContent>
-                  <Link to={`/adv/${ad.id}`}>
-                    <S.CardTitle>{ad.title}</S.CardTitle>
-                  </Link>
-                  <S.CardPrice>{ad.price.toLocaleString('ru')} ₽</S.CardPrice>
-                  <S.CardPlace>{ad.user.city}</S.CardPlace>
-                  <S.CardDate>{formatDate(ad.created_on)}</S.CardDate>
-                </S.CardContent>
-              </S.Card>
-            </S.CardsItem>
-          ))}
-        </S.Cards>
-      )} */}
+      <S.Cards>
+        {usersData?.map((user) => (
+          <S.CardsItem key={user.id}>
+            <S.Card>
+              <S.CardImg>
+                <Link to={`/user/${user.id}`}>
+                  <img
+                    src={user.avatar_url}
+                    alt="picture"
+                  />
+                </Link>
+              </S.CardImg>
+              <S.CardContent>
+                <S.CardTitle>{user.login}</S.CardTitle>
+                <Link to={`/user/${user.id}`}>
+                  <S.CardDetails>Подробнее</S.CardDetails>
+                </Link>
+              </S.CardContent>
+            </S.Card>
+          </S.CardsItem>
+        ))}
+      </S.Cards>
     </S.MainContent>
   )
 }

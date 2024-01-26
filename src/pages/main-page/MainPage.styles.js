@@ -29,6 +29,15 @@ export const Search = styled.input`
   }
 `
 
+export const Error = styled.div`
+  color: coral;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 20px;
+  text-align: left;
+`
+
 export const MainTitle = styled.h2`
   color: #000;
   font-size: 40px;
