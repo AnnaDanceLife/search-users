@@ -1,48 +1,41 @@
 import { useState } from 'react'
 import * as S from './Filter.styles'
 
-const date = [
-  { value: 'default', name: 'По умолчанию' },
-  { value: 'new', name: 'Сначала новые' },
-  { value: 'old', name: 'Сначала старые' },
-]
+export const Filter = ({ setOrder }) => {
+  const [activeFilter, setActiveFilter] = useState('desc')
 
-export const Filter = ({setDateTrack}) => {
-  const [activeFilter, setActiveFilter] = useState(null)
-
-  const filterClickHandler = (id) => {
-    setActiveFilter(activeFilter === id ? null : id)
-  }
-
+  // const filterClickHandler = (id) => {
+  //   setActiveFilter(activeFilter === id ? null : id)
+  // }
 
   return (
     <S.CenterblockFilter>
-    <S.FilterTitle>Количество репозиториев:</S.FilterTitle>
-    <S.FilterButton
-      aria-hidden="true"
-      className="_btn-text"
-      onClick={() => {
-        return filterClickHandler('year')
-      }}
-    >
-      По умолчанию
-    </S.FilterButton>
-    {activeFilter === 'year' && (
-      <S.FilterPopup>
-        <S.PopupList>
-          {date.map((item) => {
-            return (
-              <S.PopupText
-                key={item.value}
-                onClick={() => setDateTrack(item.value)}
-              >
-                {item.name}
-              </S.PopupText>
-            )
-          })}
-        </S.PopupList>
-      </S.FilterPopup>
-    )}
-  </S.CenterblockFilter>
+      <S.FilterTitle>Количество репозиториев:</S.FilterTitle>
+      <S.FilterButton
+        aria-hidden="true"
+        key="desc"
+        $activeButton={activeFilter === 'desc'}
+        onClick={() => {
+          setOrder('desc')
+          setActiveFilter('desc')
+          // return filterClickHandler('year')
+        }}
+      >
+        по убыванию
+      </S.FilterButton>
+      <S.FilterButton
+        aria-hidden="true"
+        key="asc"
+        $activeButton={activeFilter === 'asc'}
+        onClick={() => {
+          setOrder('asc')
+          setActiveFilter('asc')
+
+          // return filterClickHandler('year')
+        }}
+      >
+        по возрастанию
+      </S.FilterButton>
+    </S.CenterblockFilter>
   )
 }

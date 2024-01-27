@@ -167,18 +167,11 @@ export const CardsContainer = styled.div`
 
 export const SellerInfoContainer = styled.div`
   & p {
-    font-size: 16px;
-    line-height: 21px;
-    color: #5f5f5f;
-    margin-bottom: 10px;
-    font-family: 'Noto Sans Regular', sans-serif;
-  }
-
-  & p:first-of-type {
     font-size: 20px;
     font-weight: 600;
     line-height: 40px;
     color: #000000;
+    margin-bottom: 10px;
   }
 
   & p:last-of-type {
@@ -194,4 +187,25 @@ export const UserInfoContainer = styled(SellerInfoContainer)`
 export const TypeErrorText = styled.h3`
   color: red;
   margin-bottom: 20px;
+`
+
+export const Error = styled.div`
+  color: coral;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 20px;
+  text-align: left;
+`
+
+export const OpenProfileHeading  = styled.h3`
+color:#009ee4;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 33px;
+  margin-bottom: 20px;
+
+  &:hover {
+    color: #ff6163;
+
 `

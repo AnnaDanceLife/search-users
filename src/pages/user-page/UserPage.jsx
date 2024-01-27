@@ -1,24 +1,39 @@
-// import { useParams } from 'react-router-dom'
-// import { Cards } from '../../components/cards/Cards'
+import { Link, useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import * as S from './UserPage.styles'
+import axios from 'axios'
+import { Loader } from '../../App.styles'
+import { useEffect, useState } from 'react'
 // import { baseUrl } from '../../utils/baseUrl'
 
-// import { useGetAdsQuery } from '../../api/adsApi'
-
 export const UserPage = () => {
-//   const params = useParams()
+  const params = useParams()
+  const loginUser = params.id
 
-//   const { data = [], isLoading, error } = useGetAdsQuery()
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [userData, setUserData] = useState({})
 
-//   const adsSeller = data.filter(
-//     (ads) => Number(ads.user_id) === Number(params.id),
-//   )
-const navigate = useNavigate()
+  useEffect(() => {
+    setIsLoading(true)
+    setError(null)
+    axios
+      .get(`https://api.github.com/search/users?q=${loginUser}`)
+      .then((response) => {
+        setUserData(response.data.items[0])
+      })
+      .catch((er) => {
+        if (er.response.status === 503) {
+          setError('Сервис не доступен, попробуйте позже')
+          return
+        }
+      })
+    setIsLoading(false)
+  }, [])
 
   return (
-    <>
-      <S.ProfileContainer>
+    <S.ProfileContainer>
       <S.GoMainPageButton
         onClick={() => {
           navigate('/', { replace: true })
@@ -27,69 +42,31 @@ const navigate = useNavigate()
         Вернуться на главную
       </S.GoMainPageButton>
 
-        <S.ProfileTitle>Информация о пользователе</S.ProfileTitle>
-
-        {/* <S.Profile>
+      <S.ProfileTitle>Информация о пользователе</S.ProfileTitle>
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
+        <S.Error>{error}</S.Error>
+      ) : (
+        <S.Profile>
           <S.ProfileContent>
             <S.ProfileSettings>
               <S.SettingsLeft>
                 <S.SettingsAvatar>
-                  <a
-                    href="#"
-                    target="_self"
-                  >
-                    <img
-                      src={
-                        adsSeller[0]?.user?.avatar &&
-                        baseUrl + adsSeller[0].user.avatar
-                      }
-                    />
-                  </a>
+                  <img src={userData.avatar_url} />
                 </S.SettingsAvatar>
               </S.SettingsLeft>
               <S.SettingsRight>
-                  <S.SellerInfoContainer>
-                    <p>{adsSeller[0]?.user?.name}</p>
-                    <p>{adsSeller[0]?.user?.city}</p>
-                    <p>
-                      Продает товары с{' '}
-                      {formatDate(adsSeller[0]?.user?.sells_from)}
-                    </p>
-
-                    <div className="seller__img-mob-block">
-                      <div
-                        className="seller__img-mob"
-                        style={{ display: 'none' }}
-                      >
-                        <a
-                          href=""
-                          target="_self"
-                        >
-                          <img
-                            src="#"
-                            alt=""
-                          />
-                        </a>
-                      </div>
-
-                      <ShowPhoneNumButton phone={adsSeller[0]?.user?.phone} />
-                    </div>
-                  </S.SellerInfoContainer>
+                <S.SellerInfoContainer>
+                  <p>Логин: {userData.login}</p>
+                  <p>Тип: {userData.type}</p>
+                  <p>Профиль на GitHub доступен по адресу: {userData.url}</p>
+                </S.SellerInfoContainer>
               </S.SettingsRight>
             </S.ProfileSettings>
           </S.ProfileContent>
-        </S.Profile> */}
-      </S.ProfileContainer>
-      <S.CardsContainer>
-        {/* <S.ProfileHeading>
-          Товары продавца
-        </S.ProfileHeading>
-        <Cards
-          data={ adsSeller }
-          isLoading={isLoading}
-          error={error}
-        /> */}
-      </S.CardsContainer>
-    </>
+        </S.Profile>
+      )}
+    </S.ProfileContainer>
   )
 }

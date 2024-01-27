@@ -24,8 +24,6 @@ export const Search = styled.input`
     background-color: transparent;
     color: rgba(0, 0, 0, 0.3);
     font-style: normal;
-    font-size: 16px;
-    line-height: 24px;
   }
 `
 
@@ -44,4 +42,17 @@ export const MainTitle = styled.h2`
   font-style: normal;
   line-height: 220%;
   margin-bottom: 10px;
+`
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+`
+
+export const PageNumber = styled.div`
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 33px;
 `

@@ -26,7 +26,7 @@ export const Users = ({ usersData }) => {
           <S.CardsItem key={user.id}>
             <S.Card>
               <S.CardImg>
-                <Link to={`/user/${user.id}`}>
+                <Link to={`/user/${user.login}`}>
                   <img
                     src={user.avatar_url}
                     alt="picture"
@@ -35,7 +35,7 @@ export const Users = ({ usersData }) => {
               </S.CardImg>
               <S.CardContent>
                 <S.CardTitle>{user.login}</S.CardTitle>
-                <Link to={`/user/${user.id}`}>
+                <Link to={`/user/${user.login}`}>
                   <S.CardDetails>Подробнее</S.CardDetails>
                 </Link>
               </S.CardContent>
