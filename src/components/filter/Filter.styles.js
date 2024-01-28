@@ -37,5 +37,5 @@ export const FilterButton = styled.div`
   cursor: pointer;
 
   ${({ $activeButton }) =>
-  $activeButton && 'border-color: #009ee4 ;color:  #009ee4; cursor: pointer;'}
+    $activeButton && 'border-color: #009ee4 ;color:  #009ee4; cursor: pointer;'}
 `

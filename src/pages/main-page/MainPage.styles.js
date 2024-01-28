@@ -43,16 +43,3 @@ export const MainTitle = styled.h2`
   line-height: 220%;
   margin-bottom: 10px;
 `
-
-export const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 40px;
-`
-
-export const PageNumber = styled.div`
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 33px;
-`

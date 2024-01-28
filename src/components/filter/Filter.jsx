@@ -4,10 +4,6 @@ import * as S from './Filter.styles'
 export const Filter = ({ setOrder }) => {
   const [activeFilter, setActiveFilter] = useState('desc')
 
-  // const filterClickHandler = (id) => {
-  //   setActiveFilter(activeFilter === id ? null : id)
-  // }
-
   return (
     <S.CenterblockFilter>
       <S.FilterTitle>Количество репозиториев:</S.FilterTitle>
@@ -18,7 +14,6 @@ export const Filter = ({ setOrder }) => {
         onClick={() => {
           setOrder('desc')
           setActiveFilter('desc')
-          // return filterClickHandler('year')
         }}
       >
         по убыванию
@@ -30,8 +25,6 @@ export const Filter = ({ setOrder }) => {
         onClick={() => {
           setOrder('asc')
           setActiveFilter('asc')
-
-          // return filterClickHandler('year')
         }}
       >
         по возрастанию
