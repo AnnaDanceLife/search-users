@@ -34,15 +34,23 @@ export const App = () => {
             Math.ceil(response.data.total_count / numberOfUsersOnPage),
           )
           setIsLoading(false)
+          if (response.status === 200 && response.data.total_count === 0) {
+            setError(
+              'Пользователи с таким логином не найдены. Проверьте корректность своего запроса.',
+            )
+            return
+          }
         })
         .catch((er) => {
+          setIsLoading(false)
+
           if (er.response.status === 422) {
             setError('Введите логин пользователя, которого хотите найти')
             return
           } else if (er.response.status === 403) {
             setError('Превышен лимит запросов к серверу, попробуйте позже')
             return
-          } else if (er.response.data.status === 503) {
+          } else if (er.response.status === 503) {
             setError('Сервис не доступен, попробуйте позже')
             return
           }
