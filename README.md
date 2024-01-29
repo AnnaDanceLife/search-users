@@ -48,6 +48,6 @@ npm i
 npm run start
 ```
 
-Проект будет запущен по адресу: http://localhost:3000
+## Деплой приложения
 
-### Деплой приложения
+Приложение доступно по ссылке https://65b804afbe077f44ce9460b2--idyllic-malabi-ba96ca.netlify.app/
