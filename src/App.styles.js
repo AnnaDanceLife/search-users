@@ -52,15 +52,6 @@ ul li {
 }
 `
 
-export const Wrapper = styled.div`
-  width: 100%;
-  min-height: 100%;
-  overflow: hidden;
-  background-color: #f1f1f1;
-  display: flex;
-  flex-direction: column;
-`
-
 export const Container = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -72,6 +63,12 @@ export const Header = styled.header`
   max-width: 1178px;
   margin: 0 auto;
   padding: 20px 10px;
+`
+
+export const MainContainer = styled.div`
+  max-width: 1208px;
+  margin: 0 auto;
+  padding: 30px 10px 30px;
 `
 
 export const Button = styled.button`
@@ -117,4 +114,13 @@ export const Loader = styled.div`
     box-shadow: 0 5px 0 #009ee4 inset;
     animation: ${rotate} 2s linear infinite;
   }
+`
+
+export const Error = styled.div`
+  color: coral;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 20px;
+  text-align: left;
 `

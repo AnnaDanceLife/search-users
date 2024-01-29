@@ -6,14 +6,11 @@ export const MainContent = styled.div`
 `
 
 export const Cards = styled.div`
-  --grid-gap: 40px 26px;
-
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 270px);
-  grid-gap: var(--grid-gap);
+  grid-gap: 40px 26px;
   justify-content: center;
-  padding-top: 30px;
 
   overflow-y: auto;
   scrollbar-color: #ffffff #2e2e2e; // Firefox
@@ -41,8 +38,6 @@ export const Cards = styled.div`
   }
 `
 
-export const CardsItem = styled.div``
-
 export const Card = styled.div`
   width: 270px;
   display: flex;
@@ -56,20 +51,17 @@ export const CardImg = styled.div`
   border: 1px solid #f0f0f0;
   transition: all 0.5s linear;
 
-  & img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
   &:hover {
     transform: scale(1.03);
     box-shadow: 0 0 10px #4b4848;
   }
 `
-
-export const CardContent = styled.div``
+export const CardImgUser = styled.img`
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+`
 
 export const CardTitle = styled.h3`
   font-size: 22px;
@@ -91,5 +83,4 @@ export const CardDetails = styled.p`
 
   &:hover {
     color: #ff6163;
-
 `

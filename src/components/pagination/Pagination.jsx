@@ -1,3 +1,4 @@
+import { Button } from '../../App.styles'
 import * as S from './Pagination.styles'
 
 export const Pagination = ({
@@ -15,25 +16,25 @@ export const Pagination = ({
 
   return (
     <S.PaginationContainer>
-      <button
+      <Button
         type="button"
         onClick={handlePrevPageClick}
         disabled={disable.left}
       >
         {'<'}
-      </button>
+      </Button>
       {nav && (
-        <span>
+        <S.PageNumber>
           {nav.current} / {nav.total}
-        </span>
+        </S.PageNumber>
       )}
-      <button
+      <Button
         type="button"
         onClick={handleNextPageClick}
         disabled={disable.right}
       >
         {'>'}
-      </button>
+      </Button>
     </S.PaginationContainer>
   )
 }

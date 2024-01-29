@@ -1,17 +1,17 @@
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import * as S from './UserPage.styles'
 import axios from 'axios'
-import { Loader } from '../../App.styles'
+import { Loader, Error } from '../../App.styles'
 import { useEffect, useState } from 'react'
-// import { baseUrl } from '../../utils/baseUrl'
+import { baseUrl } from '../../utils/BaseUrl'
 
 export const UserPage = () => {
   const params = useParams()
   const loginUser = params.id
 
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const [userData, setUserData] = useState({})
 
@@ -19,9 +19,10 @@ export const UserPage = () => {
     setIsLoading(true)
     setError(null)
     axios
-      .get(`https://api.github.com/search/users?q=${loginUser}`)
+      .get(baseUrl + `?q=${loginUser}`)
       .then((response) => {
         setUserData(response.data.items[0])
+        setIsLoading(false)
       })
       .catch((er) => {
         if (er.response.status === 503) {
@@ -29,11 +30,10 @@ export const UserPage = () => {
           return
         }
       })
-    setIsLoading(false)
   }, [])
 
   return (
-    <S.ProfileContainer>
+    <>
       <S.GoMainPageButton
         onClick={() => {
           navigate('/', { replace: true })
@@ -46,27 +46,21 @@ export const UserPage = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <S.Error>{error}</S.Error>
+        <Error>{error}</Error>
       ) : (
-        <S.Profile>
-          <S.ProfileContent>
-            <S.ProfileSettings>
-              <S.SettingsLeft>
-                <S.SettingsAvatar>
-                  <img src={userData.avatar_url} />
-                </S.SettingsAvatar>
-              </S.SettingsLeft>
-              <S.SettingsRight>
-                <S.SellerInfoContainer>
-                  <p>Логин: {userData.login}</p>
-                  <p>Тип: {userData.type}</p>
-                  <p>Профиль на GitHub доступен по адресу: {userData.url}</p>
-                </S.SellerInfoContainer>
-              </S.SettingsRight>
-            </S.ProfileSettings>
-          </S.ProfileContent>
-        </S.Profile>
+        <S.ProfileUser>
+          <S.UserAvatar>
+            <S.UserAvatarImg src={userData.avatar_url} />
+          </S.UserAvatar>
+          <S.UserInfoContainer>
+            <S.UserInfoText>Логин: {userData.login}</S.UserInfoText>
+            <S.UserInfoText>Тип: {userData.type}</S.UserInfoText>
+            <S.UserInfoText>
+              Профиль на GitHub доступен по адресу: {userData.url}
+            </S.UserInfoText>
+          </S.UserInfoContainer>
+        </S.ProfileUser>
       )}
-    </S.ProfileContainer>
+    </>
   )
 }

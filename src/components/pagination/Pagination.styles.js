@@ -7,17 +7,8 @@ export const PaginationContainer = styled.div`
   margin-top: 40px;
 `
 
-export const PageNumber = styled.div`
-  font-size: 32px;
+export const PageNumber = styled.span`
+  font-size: 22px;
   font-weight: 600;
   line-height: 33px;
-
-  ${({ $activePage }) =>
-$activePage && 'color:  #009ee4; cursor: pointer;'}
-
 `
-
-
-
-
-

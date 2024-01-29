@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
+import * as S from './MainPage.styles'
 import { Users } from '../../components/users/Users'
 import { Filter } from '../../components/filter/Filter'
-import * as S from './MainPage.styles'
-import { Loader } from '../../App.styles'
+import { Loader, Error } from '../../App.styles'
 import { Pagination } from '../../components/pagination/Pagination'
+import { baseUrl } from '../../utils/BaseUrl'
 
 export const MainPage = () => {
   const [searchText, setSearchText] = useState('')
@@ -22,7 +23,7 @@ export const MainPage = () => {
       setIsLoading(true)
       setError(null)
       axios
-        .get(' https://api.github.com/search/users', {
+        .get(baseUrl, {
           params: {
             q: searchText,
             sort: 'repositories',
@@ -36,14 +37,14 @@ export const MainPage = () => {
           setPagesCount(
             Math.ceil(response.data.total_count / numberOfUsersOnPage),
           )
-          setError(null)
+          setIsLoading(false)
         })
         .catch((er) => {
-          if (
-            er.response.data.status === 422 ||
-            er.response.data.status === 403
-          ) {
+          if (er.response.status === 422) {
             setError('Введите логин пользователя, которого хотите найти')
+            return
+          } else if (er.response.status === 403) {
+            setError('Превышен лимит запросов к серверу, попробуйте позже')
             return
           } else if (er.response.data.status === 503) {
             setError('Сервис не доступен, попробуйте позже')
@@ -51,7 +52,6 @@ export const MainPage = () => {
           }
         })
     }
-    setIsLoading(false)
   }, [searchText, pageNumber, order])
 
   const handleNextPageClick = useCallback(() => {
@@ -66,11 +66,11 @@ export const MainPage = () => {
     const current = pageNumber
     const prev = current - 1
 
-    setPage(prev > 0 ? prev : current)
+    setPageNumber(prev > 0 ? prev : current)
   }, [pageNumber])
 
   return (
-    <S.MainContainer>
+    <>
       <S.Search
         type="search"
         value={searchText}
@@ -83,22 +83,22 @@ export const MainPage = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <S.Error>{error}</S.Error>
+        <Error>{error}</Error>
       ) : (
-        <Users usersData={usersList} />
-      )}
+        <>
+          <Users usersData={usersList} />
 
-      {usersList && (
-        <Pagination
-          onNextPageClick={handleNextPageClick}
-          onPrevPageClick={handlePrevPageClick}
-          disable={{
-            left: pageNumber === 1,
-            right: pageNumber === pagesCount,
-          }}
-          nav={{ current: pageNumber, total: pagesCount }}
-        />
+          <Pagination
+            onNextPageClick={handleNextPageClick}
+            onPrevPageClick={handlePrevPageClick}
+            disable={{
+              left: pageNumber === 1,
+              right: pageNumber === pagesCount,
+            }}
+            nav={{ current: pageNumber, total: pagesCount }}
+          />
+        </>
       )}
-    </S.MainContainer>
+    </>
   )
 }

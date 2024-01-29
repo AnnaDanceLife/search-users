@@ -1,11 +1,5 @@
 import styled from 'styled-components'
 
-export const MainContainer = styled.div`
-  max-width: 1208px;
-  margin: 0 auto;
-  padding: 4px 10px 30px;
-`
-
 export const Search = styled.input`
   width: 100%;
   height: 50px;
@@ -27,19 +21,11 @@ export const Search = styled.input`
   }
 `
 
-export const Error = styled.div`
-  color: coral;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24px;
-  margin-top: 20px;
-  text-align: left;
-`
-
 export const MainTitle = styled.h2`
   color: #000;
   font-size: 40px;
   font-style: normal;
   line-height: 220%;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+  margin-top: 30px;
 `
