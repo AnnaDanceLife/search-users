@@ -12,8 +12,8 @@ export const Filter = ({ setOrder }) => {
         key="desc"
         $activeButton={activeFilter === 'desc'}
         onClick={() => {
-          setOrder('desc')
           setActiveFilter('desc')
+          setOrder('desc')
         }}
       >
         по убыванию
@@ -23,8 +23,8 @@ export const Filter = ({ setOrder }) => {
         key="asc"
         $activeButton={activeFilter === 'asc'}
         onClick={() => {
-          setOrder('asc')
           setActiveFilter('asc')
+          setOrder('asc')
         }}
       >
         по возрастанию
