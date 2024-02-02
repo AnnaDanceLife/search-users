@@ -50,4 +50,4 @@ npm run start
 
 ## Деплой приложения
 
-Приложение доступно по ссылке https://65b804afbe077f44ce9460b2--idyllic-malabi-ba96ca.netlify.app/
+Приложение доступно по ссылке https://idyllic-malabi-ba96ca.netlify.app
