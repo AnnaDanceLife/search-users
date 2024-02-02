@@ -1,10 +1,13 @@
+import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { Context } from '../../context/Context'
 import * as S from './UserPage.styles'
 
-export const UserPage = ({ usersList }) => {
+export const UserPage = () => {
   const params = useParams()
   const loginUser = params.id
+  const [usersList] = useContext(Context)
 
   const navigate = useNavigate()
 

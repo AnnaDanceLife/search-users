@@ -1,8 +1,13 @@
 import { useState } from 'react'
 import * as S from './Filter.styles'
 
-export const Filter = ({ setOrder }) => {
-  const [activeFilter, setActiveFilter] = useState('desc')
+export const Filter = ({ order, setOrder }) => {
+  const [activeFilter, setActiveFilter] = useState(order)
+
+  const handleActiveFilter = (or) => {
+    setActiveFilter(or)
+    setOrder(or)
+  }
 
   return (
     <S.CenterblockFilter>
@@ -11,10 +16,7 @@ export const Filter = ({ setOrder }) => {
         aria-hidden="true"
         key="desc"
         $activeButton={activeFilter === 'desc'}
-        onClick={() => {
-          setActiveFilter('desc')
-          setOrder('desc')
-        }}
+        onClick={() => handleActiveFilter('desc')}
       >
         по убыванию
       </S.FilterButton>
@@ -22,10 +24,7 @@ export const Filter = ({ setOrder }) => {
         aria-hidden="true"
         key="asc"
         $activeButton={activeFilter === 'asc'}
-        onClick={() => {
-          setActiveFilter('asc')
-          setOrder('asc')
-        }}
+        onClick={() => handleActiveFilter('asc')}
       >
         по возрастанию
       </S.FilterButton>
